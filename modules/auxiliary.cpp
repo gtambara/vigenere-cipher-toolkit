@@ -1,8 +1,5 @@
 #include "./headers/auxiliary.h"
 
-#define TAM_ALFABETO 26
-#define FILES_FOLDER "workspace/"
-
 std::vector<char> extendKey(std::vector<char> key, const int newSize)
 {
   std::vector<char> keyAux;
