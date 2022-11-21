@@ -1,5 +1,12 @@
 #include "./headers/auxiliary.h"
 
+/**
+ * @brief Extend the key string to a keystream of the message's size.
+ *
+ * @param key Cryptographic key used for encription.
+ * @param newSize Size of the message.
+ * @return std::vector<char> Extended keystream.
+ */
 std::vector<char> extendKey(std::vector<char> key, const int newSize)
 {
   std::vector<char> keyAux;
@@ -21,12 +28,23 @@ std::vector<char> extendKey(std::vector<char> key, const int newSize)
   return keyAux;
 }
 
+/**
+ * @brief Transform a text to remove casp lock.
+ *
+ * @param text Text to be transformed.
+ */
 void toLower(std::string *text)
 {
   std::transform((*text).begin(), (*text).end(), (*text).begin(), [](unsigned char c)
                  { return std::tolower(c); });
 }
 
+/**
+ * @brief Output text to filename.txt file.
+ *
+ * @param text Text to be outputted.
+ * @param filename Name of the file for the text to be outstreamed to.
+ */
 void outputText(std::vector<char> text, std::string filename)
 {
   std::string ss(text.begin(), text.end());
@@ -35,6 +53,12 @@ void outputText(std::vector<char> text, std::string filename)
   file.close();
 }
 
+/**
+ * @brief Input text from filename.txt file.
+ *
+ * @param filename Name of the file for the text to be read.
+ * @return std::string String from which the input text is saved.
+ */
 std::string inputText(std::string filename)
 {
   std::ifstream file(FILES_FOLDER + filename + ".txt");

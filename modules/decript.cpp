@@ -1,5 +1,12 @@
 #include "./headers/decript.h"
 
+/**
+ * @brief Decripts a Vigenere's criptogram.
+ *
+ * @param key Key used to decriptograph the text.
+ * @param cript The criptogram to be decriptographed.
+ * @return std::vector<char> Text decriptographed from the criptogram.
+ */
 std::vector<char> decript(std::vector<char> key, std::vector<char> cript)
 {
   std::vector<char> message;
