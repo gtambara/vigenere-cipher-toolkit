@@ -1,7 +1,7 @@
 #include <iostream>
-#include "encript.h"
-#include "decript.h"
-#include "auxiliary.h"
+#include "./modules/headers/encript.h"
+#include "./modules/headers/decript.h"
+#include "./modules/headers/auxiliary.h"
 
 int main()
 {
