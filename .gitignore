@@ -1,6 +1,10 @@
 # VSCODE
 .vscode/
 
+# Doxygen
+html/
+latex/
+
 # Prerequisites
 *.d
 
