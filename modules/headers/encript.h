@@ -1,3 +1,8 @@
+/**
+ * @file encript.h
+ * @brief Encription related code header.
+ *
+ */
 #ifndef ENCRIPT_H
 #define ENCRIPT_H
 

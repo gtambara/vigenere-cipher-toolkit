@@ -1,3 +1,8 @@
+/**
+ * @file decript.cpp
+ * @brief Decription related code.
+ *
+ */
 #include "./headers/decript.h"
 
 /**

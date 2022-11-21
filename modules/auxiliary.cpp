@@ -1,3 +1,8 @@
+/**
+ * @file auxiliary.cpp
+ * @brief Auxiliary functions for encription/decription related code.
+ *
+ */
 #include "./headers/auxiliary.h"
 
 /**

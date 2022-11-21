@@ -1,8 +1,23 @@
+/**
+ * @file main.cpp
+ * @author Gabriel Tambara Rabelo (180017021@aluno.unb.br)
+ * @brief Main routine file for Vigenere's cipher.
+ * @version 1.0
+ * @date 2022-11-21
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include <iostream>
 #include "./modules/headers/encript.h"
 #include "./modules/headers/decript.h"
 #include "./modules/headers/auxiliary.h"
 
+/**
+ * @brief Main routine for encription and decription of Vigenere's cipher.
+ *
+ * @return int Exit code.
+ */
 int main()
 {
 

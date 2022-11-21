@@ -1,3 +1,8 @@
+/**
+ * @file encript.cpp
+ * @brief Encription related code.
+ *
+ */
 #include "./headers/encript.h"
 
 /**

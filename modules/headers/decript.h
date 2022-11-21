@@ -1,3 +1,8 @@
+/**
+ * @file decript.h
+ * @brief Decription related code header.
+ *
+ */
 #ifndef DECRIPT_H
 #define DECRIPT_H
 
