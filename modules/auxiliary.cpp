@@ -71,7 +71,7 @@ std::string inputText(std::string filename)
 }
 
 /**
- * @brief Find util size of vector, disconsidering non characters.
+ * @brief Find useful size of vector, disregarding non characters.
  *
  * @param msg Message to be analyzed.
  * @return int Size of message.

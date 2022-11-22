@@ -12,6 +12,7 @@
 #include "./modules/headers/encript.h"
 #include "./modules/headers/decript.h"
 #include "./modules/headers/auxiliary.h"
+#include "./modules/headers/break.h"
 
 /**
  * @brief Main routine for encription and decription of Vigenere's cipher.
