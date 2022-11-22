@@ -69,3 +69,22 @@ std::string inputText(std::string filename)
   std::ifstream file(FILES_FOLDER + filename + ".txt");
   return std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 }
+
+/**
+ * @brief Find util size of vector, disconsidering non characters.
+ *
+ * @param msg Message to be analyzed.
+ * @return int Size of message.
+ */
+int trueSize(std::vector<char> msg)
+{
+  int size = 0;
+  for (int i = 0; i < msg.size(); i++)
+  {
+    if (msg[i] >= 'a' && msg[i] <= 'z')
+    {
+      size++;
+    }
+  }
+  return ++size;
+}

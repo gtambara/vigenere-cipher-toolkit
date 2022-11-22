@@ -21,5 +21,6 @@ std::vector<char> extendKey(std::vector<char> key, const int newSize);
 void toLower(std::string *text);
 void outputText(std::vector<char> text, std::string filename);
 std::string inputText(std::string filename);
+int trueSize(std::vector<char> msg);
 
 #endif

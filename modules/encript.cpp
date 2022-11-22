@@ -17,24 +17,21 @@ std::vector<char> encript(std::vector<char> key, std::vector<char> msg)
   std::vector<char> cryptogram;
   std::vector<char> keyAux;
 
-  const int MSG_SIZE = msg.size();
+  const int MSG_SIZE = trueSize(msg);
 
   keyAux = extendKey(key, msg.size());
 
+  int j = 0;
   for (int i = 0; i < MSG_SIZE; i++)
   {
     if (msg[i] > 'z' || msg[i] < 'a')
     {
       cryptogram.push_back(msg[i]);
-      continue;
-    }
-    if (msg[i] + keyAux[i] - 'a' > 'z')
-    {
-      cryptogram.push_back(msg[i] + keyAux[i] - 'a' - TAM_ALFABETO);
     }
     else
     {
-      cryptogram.push_back(msg[i] + keyAux[i] - 'a');
+      cryptogram.push_back(((msg[i] - 'a' + keyAux[j] - 'a') % TAM_ALFABETO) + 'a');
+      j++;
     }
   }
 
