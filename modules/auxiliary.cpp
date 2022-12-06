@@ -45,6 +45,24 @@ void toLower(std::string *text)
 }
 
 /**
+ * @brief Format text by removing spaces and special characters.
+ *
+ * @param text Text to be formatted.
+ */
+std::vector<char> formatText(std::vector<char> text)
+{
+  std::vector<char> aux;
+  for (int i = 0; i < text.size(); i++)
+  {
+    if (text[i] >= 'a' && text[i] <= 'z')
+    {
+      aux.push_back(text[i]);
+    }
+  }
+  return aux;
+}
+
+/**
  * @brief Output text to filename.txt file.
  *
  * @param text Text to be outputted.
@@ -86,5 +104,5 @@ int trueSize(std::vector<char> msg)
       size++;
     }
   }
-  return ++size;
+  return size;
 }
