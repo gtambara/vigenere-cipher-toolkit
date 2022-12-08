@@ -24,15 +24,8 @@ std::vector<char> decript(std::vector<char> key, std::vector<char> cript)
   int j = 0;
   for (int i = 0; i < MSG_SIZE; i++)
   {
-    if (cript[i] > 'z' || cript[i] < 'a')
-    {
-      message.push_back(cript[i]);
-    }
-    else
-    {
-      message.push_back(((cript[i] - keyAux[j] + TAM_ALFABETO) % TAM_ALFABETO) + 'a');
-      j++;
-    }
+    message.push_back(((cript[i] - keyAux[j] + TAM_ALFABETO) % TAM_ALFABETO) + 'a');
+    j++;
   }
 
   return message;

@@ -24,15 +24,8 @@ std::vector<char> encript(std::vector<char> key, std::vector<char> msg)
   int j = 0;
   for (int i = 0; i < MSG_SIZE; i++)
   {
-    if (msg[i] > 'z' || msg[i] < 'a')
-    {
-      cryptogram.push_back(msg[i]);
-    }
-    else
-    {
-      cryptogram.push_back(((msg[i] - 'a' + keyAux[j] - 'a') % TAM_ALFABETO) + 'a');
-      j++;
-    }
+    cryptogram.push_back(((msg[i] - 'a' + keyAux[j] - 'a') % TAM_ALFABETO) + 'a');
+    j++;
   }
 
   return cryptogram;

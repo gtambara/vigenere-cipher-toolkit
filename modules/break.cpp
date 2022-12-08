@@ -5,20 +5,6 @@
  */
 #include "./headers/break.h"
 
-std::vector<char> latinAlphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-
-std::vector<float> PortugueseFrequency = {0.14630, 0.01040, 0.03880, 0.04990, 0.12570, 0.01020,
-                                          0.01300, 0.01280, 0.06180, 0.00400, 0.00020, 0.02780,
-                                          0.04740, 0.05050, 0.10730, 0.02520, 0.01200, 0.06530,
-                                          0.07810, 0.04340, 0.04630, 0.01670, 0.00100, 0.02100,
-                                          0.00100, 0.04700};
-
-std::vector<float> EnglishFrequency = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228,
-                                       0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
-                                       0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
-                                       0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
-                                       0.01974, 0.00074};
-
 /**
  * @brief Find all instances of a specific substring in a string txt.
  *
@@ -95,15 +81,14 @@ std::vector<particles> findParticles(std::vector<char> text)
   return output;
 }
 
+#if ADVANCED_STRING_CUT == 1
+
 /**
  * @brief Creates new list of particles with removed substrings that can be contained by other substrings to deal with redundancy.
  *
  * @param input Input vector of particles to be filtered.
  * @return std::vector<particles> Filtered vector of particles.
  */
-
-#if ADVANCED_STRING_CUT == 1
-
 std::vector<particles> filterRepetitive(std::vector<particles> input)
 {
   std::vector<particles> output;
@@ -347,7 +332,7 @@ void printFactors(std::vector<std::vector<int>> factorList)
  * @brief Finds the index of coincidence of a text.
  *
  * @param text Text to be analyzed.
- * @return int The index of coincidence.
+ * @return float The index of coincidence.
  */
 float findIndexOfCoincidence(std::vector<char> text)
 {
@@ -355,9 +340,9 @@ float findIndexOfCoincidence(std::vector<char> text)
   float index = 0;
   float textSize = text.size();
 
-  for (int i = 0; i < latinAlphabet.size(); i++)
+  for (int i = 0; i < TAM_ALFABETO; i++)
   {
-    frequency = count(text.begin(), text.end(), latinAlphabet[i]);
+    frequency = count(text.begin(), text.end(), 'a' + i);
     index += (frequency * (frequency - 1));
   }
 
@@ -682,17 +667,18 @@ char findLetterWithLowerXi(std::vector<double> xiSquared)
   double xiAux = 999;
   for (int i = 0; i < TAM_ALFABETO; i++)
   {
-    printf("%c", latinAlphabet[i]);
     if (xiSquared[i] < xiAux)
     {
       xiAux = xiSquared[i];
       letterIndex = i;
     }
   }
+
 #if DEBUG_MODE == 1
-  std::cout << "won Letter: " << latinAlphabet[letterIndex] << "\n";
+  std::cout << "won Letter: " << (char)('a' + letterIndex) << "\n";
 #endif
-  return latinAlphabet[letterIndex];
+
+  return ('a' + letterIndex);
 }
 
 /**
@@ -704,6 +690,18 @@ char findLetterWithLowerXi(std::vector<double> xiSquared)
  */
 std::vector<char> findKey(std::vector<std::vector<char>> cosets, int language)
 {
+  std::vector<float> PortugueseFrequency = {0.14630, 0.01040, 0.03880, 0.04990, 0.12570, 0.01020,
+                                            0.01300, 0.01280, 0.06180, 0.00400, 0.00020, 0.02780,
+                                            0.04740, 0.05050, 0.10730, 0.02520, 0.01200, 0.06530,
+                                            0.07810, 0.04340, 0.04630, 0.01670, 0.00100, 0.02100,
+                                            0.00100, 0.04700};
+
+  std::vector<float> EnglishFrequency = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228,
+                                         0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
+                                         0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
+                                         0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
+                                         0.01974, 0.00074};
+
   std::vector<float> baseFrequency;
   if (language == 0)
   {
@@ -750,7 +748,7 @@ std::vector<char> findKey(std::vector<std::vector<char>> cosets, int language)
 
   printf("\nEstimated key: ");
   for (char i : key)
-    std::cout << i << ' ';
-
+    std::cout << i;
+  std::cout << std::endl;
   return key;
 }

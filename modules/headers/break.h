@@ -10,7 +10,7 @@
 #define ADVANCED_STRING_CUT 1 // 1 for more adquate substring repetition cuts but with more bias on result, 0 for off
 #define MAX_KEY_SIZE 20
 #define MIN_KEY_SIZE 4
-#define DEBUG_MODE 1 // 1 for on, 0 for off
+#define DEBUG_MODE 0 // 1 for on, 0 for off
 
 #include <vector>
 #include <algorithm> // for transform and find functions
