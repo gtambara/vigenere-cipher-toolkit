@@ -576,7 +576,7 @@ std::vector<std::vector<char>> changeTextFormat(std::vector<char> text, int keyS
   }
 
 #if DEBUG_MODE == 1
-  printf("vei:\n");
+  printf("\nvei:\n");
   for (int i = 0; i < stringLists.size(); i++)
   {
     printf("*");
@@ -600,20 +600,21 @@ std::vector<std::vector<char>> changeTextFormat(std::vector<char> text, int keyS
 std::vector<double> getLettersFrequency(std::vector<char> coset)
 {
   std::vector<double> frequency(TAM_ALFABETO, 0);
+
   for (int i = 0; i < coset.size(); i++)
   {
     frequency[(int)(coset[i] - 'a')]++;
   }
-  for (int i = 0; i < coset.size(); i++)
+  for (int i = 0; i < frequency.size(); i++)
   {
-    frequency[i] /= (double)coset.size();
+    frequency[i] /= (double)(coset.size());
   }
 
 #if DEBUG_MODE == 1
   printf("\nfreq: ");
   for (int i = 0; i < frequency.size(); i++)
   {
-    std::cout << frequency[i] << ",";
+    std::cout << (frequency.at(i)) << ",";
   }
   printf("\n");
 #endif

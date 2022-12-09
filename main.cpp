@@ -23,6 +23,7 @@ int main()
 {
 	std::string s = inputText("input");
 	std::string k = inputText("key");
+	std::string c = inputText("criptogram");
 	std::vector<char> cript;
 	std::vector<char> msg;
 	std::vector<char> key;
@@ -42,14 +43,15 @@ int main()
 	do
 	{
 		std::cout << "Vigenere cipher toolbox" << std::endl;
-		std::cout << "1 - Automated process" << std::endl;
+		std::cout << "1 - Full test routine" << std::endl;
 		std::cout << "2 - Import text" << std::endl;
 		std::cout << "3 - Import key" << std::endl;
-		std::cout << "4 - Cipher text" << std::endl;
-		std::cout << "5 - Decipher text with known key" << std::endl;
-		std::cout << "6 - Estimate key size" << std::endl;
-		std::cout << "7 - Find key with chosen size" << std::endl;
-		std::cout << "8 - Choose text for decription language" << std::endl;
+		std::cout << "4 - Import criptogram" << std::endl;
+		std::cout << "5 - Cipher text" << std::endl;
+		std::cout << "6 - Decipher text with known key" << std::endl;
+		std::cout << "7 - Estimate key size" << std::endl;
+		std::cout << "8 - Find key with chosen size" << std::endl;
+		std::cout << "9 - Choose text for decription language" << std::endl;
 		std::cout << "0 - Exit" << std::endl;
 		std::cin >> operation;
 
@@ -102,35 +104,61 @@ int main()
 		case '2':
 			s = inputText("input");
 			toLower(&s);
+			msg.clear();
 			std::copy(s.begin(), s.end(), std::back_inserter(msg));
 			msg = formatText(msg);
-			std::cout << "\nText imported\n"
+			std::cout << "\nText imported:\n"
+								<< std::endl;
+
+			for (char i : msg)
+				std::cout << i;
+			std::cout << std::endl
 								<< std::endl;
 			break;
 
 		case '3':
 			k = inputText("key");
 			toLower(&k);
+			key.clear();
 			std::copy(k.begin(), k.end(), std::back_inserter(key));
 			key = formatText(key);
-			std::cout << "\nKey imported\n"
+			std::cout << "\nKey imported:\n"
+								<< std::endl;
+
+			for (char i : key)
+				std::cout << i;
+			std::cout << std::endl
 								<< std::endl;
 			break;
 
 		case '4':
+			c = inputText("criptogram");
+			toLower(&c);
+			cript.clear();
+			std::copy(c.begin(), c.end(), std::back_inserter(cript));
+			cript = formatText(cript);
+			std::cout << "\nCriptogram imported:\n"
+								<< std::endl;
+			for (char i : cript)
+				std::cout << i;
+			std::cout << std::endl
+								<< std::endl;
+			break;
+
+		case '5':
 			cript = encript(key, msg);
 			outputText(cript, "criptogram");
 			std::cout << "\nCriptogram generated\n"
 								<< std::endl;
 			break;
 
-		case '5':
+		case '6':
 			outputText(decript(key, cript), "output");
 			std::cout << "\nDecripted output generated\n"
 								<< std::endl;
 			break;
 
-		case '6':
+		case '7':
 			// Kasiski examination for key size
 			listRepeated = findParticles(cript);
 			listRepeated = filterRepetitive(listRepeated);
@@ -139,10 +167,16 @@ int main()
 			sortFactors(&listOfFactors);
 			printFactors(listOfFactors);
 
+			std::cout << "\nKasiski method finished. Beggining Friedman test.\n"
+								<< std::endl;
+
 			// Friedman test for key size
 			keyList = findKeySizeList(cript);
 			sortKeySizes(&keyList);
 			printIndexAndKeys(keyList);
+
+			std::cout << "\nFriedman method finished. Merging results.\n"
+								<< std::endl;
 
 			// Uniting both methods
 			finalKeys = uniteEstimationMethods(keyList, listOfFactors);
@@ -151,17 +185,19 @@ int main()
 			std::cout << std::endl;
 			break;
 
-		case '7':
+		case '8':
 			std::cout << "\nPress the selected key size number\n"
 								<< std::endl;
 			std::cin >> selectedSize;
+			std::cout << "\nSelected key size of " << selectedSize << std::endl
+								<< std::endl;
 			// Finding the key
 			matrixText = changeTextFormat(cript, selectedSize);
 			EstimatedKey = findKey(matrixText, selectedLang);
 			std::cout << std::endl;
 			break;
 
-		case '8':
+		case '9':
 			std::cout << "\nPress 0 for portuguese and 1 for english\n"
 								<< std::endl;
 			std::cin >> selectedLang;
