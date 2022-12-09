@@ -10,6 +10,6 @@ For simple compilation, all you gou've got to run is:
 
 or even:
 
-> g++ .\*.cpp .\modules\*.cpp
+> g++ *.cpp modules/*.cpp
 
 All relevant files will be deploied on **/workspace** directory.
