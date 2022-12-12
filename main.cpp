@@ -40,6 +40,7 @@ int main()
 	int selectedLang = 1;
 
 	char operation;
+	char operationTwo;
 	do
 	{
 		std::cout << "Vigenere cipher toolbox" << std::endl;
@@ -159,30 +160,69 @@ int main()
 			break;
 
 		case '7':
-			// Kasiski examination for key size
-			listRepeated = findParticles(cript);
-			listRepeated = filterRepetitive(listRepeated);
-			calcDistances(&listRepeated);
-			listOfFactors = findFactors(listRepeated);
-			sortFactors(&listOfFactors);
-			printFactors(listOfFactors);
+			do
+			{
+				std::cout << "\nSelect the method of estimation\n"
+									<< std::endl;
+				std::cout << "\n1 - Kasiski method (slow for big texts)\n"
+									<< std::endl;
+				std::cout << "\n2 - Fridman method (fast)\n"
+									<< std::endl;
+				std::cout << "\n3 - Mix methods\n"
+									<< std::endl;
+				std::cin >> operationTwo;
 
-			std::cout << "\nKasiski method finished. Beggining Friedman test.\n"
-								<< std::endl;
+			} while (operationTwo != '1' && operationTwo != '2' && operationTwo != '3');
 
-			// Friedman test for key size
-			keyList = findKeySizeList(cript);
-			sortKeySizes(&keyList);
-			printIndexAndKeys(keyList);
+			switch (operationTwo)
+			{
+			case '1':
+				listRepeated = findParticles(cript);
+				listRepeated = filterRepetitive(listRepeated);
+				calcDistances(&listRepeated);
+				listOfFactors = findFactors(listRepeated);
+				sortFactors(&listOfFactors);
+				printFactors(listOfFactors);
+				break;
 
-			std::cout << "\nFriedman method finished. Merging results.\n"
-								<< std::endl;
+			case '2':
+				keyList = findKeySizeList(cript);
+				sortKeySizes(&keyList);
+				printIndexAndKeys(keyList);
+				break;
 
-			// Uniting both methods
-			finalKeys = uniteEstimationMethods(keyList, listOfFactors);
-			sortKeySizes(&finalKeys);
-			printFinalKeySizes(finalKeys);
-			std::cout << std::endl;
+			case '3':
+				// Kasiski examination for key size
+				listRepeated = findParticles(cript);
+				listRepeated = filterRepetitive(listRepeated);
+				calcDistances(&listRepeated);
+				listOfFactors = findFactors(listRepeated);
+				sortFactors(&listOfFactors);
+				printFactors(listOfFactors);
+
+				std::cout << "\nKasiski method finished. Beggining Friedman test.\n"
+									<< std::endl;
+
+				// Friedman test for key size
+				keyList = findKeySizeList(cript);
+				sortKeySizes(&keyList);
+				printIndexAndKeys(keyList);
+
+				std::cout << "\nFriedman method finished. Merging results.\n"
+									<< std::endl;
+
+				// Uniting both methods
+				finalKeys = uniteEstimationMethods(keyList, listOfFactors);
+				sortKeySizes(&finalKeys);
+				printFinalKeySizes(finalKeys);
+				std::cout << std::endl;
+				break;
+
+			default:
+				std::cout << "Invalid command, please try again" << std::endl;
+				break;
+			}
+
 			break;
 
 		case '8':
