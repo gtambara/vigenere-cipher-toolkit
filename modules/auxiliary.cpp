@@ -45,7 +45,7 @@ void toLower(std::string *text)
 }
 
 /**
- * @brief Format text by removing spaces and special characters.
+ * @brief Format text by removing/adapting spaces and special characters.
  *
  * @param text Text to be formatted.
  */
@@ -105,4 +105,69 @@ int trueSize(std::vector<char> msg)
     }
   }
   return size;
+}
+
+/**
+ * @brief Holds the information about where to put special characters in the text after removing them.
+ *
+ * @param text  Text with special chars to be later removed.
+ * @return std::vector<int> Vector with the proper index where special chars need to be placed again later.
+ */
+std::vector<specialChars> receiveSpecials(std::string text)
+{
+  std::vector<specialChars> replacementList;
+  specialChars itemAux;
+
+  for (int i = 0; i < text.size(); i++)
+  {
+    if (text[i] > 'z' || text[i] < 'a')
+    {
+      if ((unsigned char)text[i] > 127) // Verify if it's a non ascii character
+      {
+        itemAux.index = -1;
+        replacementList.push_back(itemAux);
+      }
+      else
+      {
+        itemAux.character = text[i];
+        itemAux.index = i;
+        replacementList.push_back(itemAux);
+      }
+
+      printf("[%d,%c]", itemAux.index, itemAux.character);
+    }
+  }
+
+  return replacementList;
+}
+
+/**
+ * @brief Add spaces in the indexes saved  before removing them in the text.
+ *
+ * @param text Text to add spaces.
+ * @param spaces Vector of index of spaces positions.
+ */
+void addSpecials(std::vector<char> *text, std::vector<specialChars> replacementList)
+{
+  int errorCounter = 0;
+  (*text).push_back(' ');
+  for (int i = 0; i <= (*text).size() + errorCounter; i++)
+  {
+    if (replacementList[0].index == -1)
+    {
+      replacementList.erase(replacementList.begin());
+      errorCounter++;
+    }
+    if (i == replacementList[0].index)
+    {
+      printf("\n[%d,%c]\n", i, replacementList.back().character);
+      (*text).insert((*text).begin() + i - errorCounter, replacementList[0].character);
+      replacementList.erase(replacementList.begin());
+    }
+    if (replacementList.size() == 0)
+    {
+      break;
+    }
+  }
+  (*text).pop_back();
 }

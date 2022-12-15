@@ -21,12 +21,22 @@
  */
 int main()
 {
+	bool insertedText = false;
+	bool insertedKey = false;
+	bool insertedCriptogram = false;
+
 	std::string s = inputText("input");
 	std::string k = inputText("key");
 	std::string c = inputText("criptogram");
+
+	std::vector<specialChars> replacementList;
+
 	std::vector<char> cript;
 	std::vector<char> msg;
 	std::vector<char> key;
+
+	std::vector<char> outputAux;
+	std::vector<int> spaces;
 
 	std::vector<particles> listRepeated;
 	std::vector<std::vector<int>> listOfFactors;
@@ -62,6 +72,7 @@ int main()
 
 			s = inputText("input");
 			k = inputText("key");
+			replacementList = receiveSpecials(s);
 
 			toLower(&s);
 			toLower(&k);
@@ -74,7 +85,10 @@ int main()
 
 			cript = encript(key, msg);
 			outputText(cript, "criptogram");
-			outputText(decript(key, cript), "output");
+
+			outputAux = decript(key, cript);
+			addSpecials(&outputAux, replacementList);
+			outputText(outputAux, "output");
 
 			// Kasiski examination for key size
 
@@ -104,6 +118,7 @@ int main()
 
 		case '2':
 			s = inputText("input");
+			replacementList = receiveSpecials(s);
 			toLower(&s);
 			msg.clear();
 			std::copy(s.begin(), s.end(), std::back_inserter(msg));
@@ -115,6 +130,8 @@ int main()
 				std::cout << i;
 			std::cout << std::endl
 								<< std::endl;
+
+			insertedText = true;
 			break;
 
 		case '3':
@@ -130,10 +147,13 @@ int main()
 				std::cout << i;
 			std::cout << std::endl
 								<< std::endl;
+
+			insertedKey = true;
 			break;
 
 		case '4':
 			c = inputText("criptogram");
+			replacementList = receiveSpecials(c);
 			toLower(&c);
 			cript.clear();
 			std::copy(c.begin(), c.end(), std::back_inserter(cript));
@@ -144,22 +164,44 @@ int main()
 				std::cout << i;
 			std::cout << std::endl
 								<< std::endl;
+
+			insertedCriptogram = true;
 			break;
 
 		case '5':
+			if (insertedKey == false || insertedText == false)
+			{
+				std::cout << "You have to import a key and a message for this process." << std::endl;
+				break;
+			}
 			cript = encript(key, msg);
+			addSpecials(&cript, replacementList);
 			outputText(cript, "criptogram");
 			std::cout << "\nCriptogram generated\n"
 								<< std::endl;
 			break;
 
 		case '6':
-			outputText(decript(key, cript), "output");
+			if (insertedKey == false || insertedCriptogram == false)
+			{
+				std::cout << "You have to import a key and a criptogram for this process." << std::endl;
+				break;
+			}
+			outputAux = decript(key, cript);
+
+			addSpecials(&outputAux, replacementList);
+			outputText(outputAux, "output");
 			std::cout << "\nDecripted output generated\n"
 								<< std::endl;
+
 			break;
 
 		case '7':
+			if (insertedCriptogram == false)
+			{
+				std::cout << "You have to import a criptogram for this process." << std::endl;
+				break;
+			}
 			do
 			{
 				std::cout << "\nSelect the method of estimation\n"
@@ -226,6 +268,11 @@ int main()
 			break;
 
 		case '8':
+			if (insertedCriptogram == false)
+			{
+				std::cout << "You have to import a criptogram for this process." << std::endl;
+				break;
+			}
 			std::cout << "\nPress the selected key size number\n"
 								<< std::endl;
 			std::cin >> selectedSize;
