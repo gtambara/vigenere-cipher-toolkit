@@ -133,8 +133,9 @@ std::vector<specialChars> receiveSpecials(std::string text)
         itemAux.index = i;
         replacementList.push_back(itemAux);
       }
-
+#if DEBUG_MODE == 0
       printf("[%d,%c]", itemAux.index, itemAux.character);
+#endif
     }
   }
 
@@ -149,6 +150,11 @@ std::vector<specialChars> receiveSpecials(std::string text)
  */
 void addSpecials(std::vector<char> *text, std::vector<specialChars> replacementList)
 {
+  if (replacementList.size() <= 0)
+  {
+    return;
+  }
+
   int errorCounter = 0;
   (*text).push_back(' ');
   for (int i = 0; i <= (*text).size() + errorCounter; i++)
@@ -160,7 +166,9 @@ void addSpecials(std::vector<char> *text, std::vector<specialChars> replacementL
     }
     if (i == replacementList[0].index)
     {
+#if DEBUG_MODE == 0
       printf("\n[%d,%c]\n", i, replacementList.back().character);
+#endif
       (*text).insert((*text).begin() + i - errorCounter, replacementList[0].character);
       replacementList.erase(replacementList.begin());
     }

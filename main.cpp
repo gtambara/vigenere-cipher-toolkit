@@ -72,10 +72,11 @@ int main()
 
 			s = inputText("input");
 			k = inputText("key");
-			replacementList = receiveSpecials(s);
 
 			toLower(&s);
 			toLower(&k);
+
+			replacementList = receiveSpecials(s);
 
 			std::copy(s.begin(), s.end(), std::back_inserter(msg));
 			std::copy(k.begin(), k.end(), std::back_inserter(key));
@@ -118,8 +119,8 @@ int main()
 
 		case '2':
 			s = inputText("input");
-			replacementList = receiveSpecials(s);
 			toLower(&s);
+			replacementList = receiveSpecials(s);
 			msg.clear();
 			std::copy(s.begin(), s.end(), std::back_inserter(msg));
 			msg = formatText(msg);
@@ -175,10 +176,11 @@ int main()
 				break;
 			}
 			cript = encript(key, msg);
-			addSpecials(&cript, replacementList);
 			outputText(cript, "criptogram");
 			std::cout << "\nCriptogram generated\n"
 								<< std::endl;
+
+			insertedCriptogram = true;
 			break;
 
 		case '6':
@@ -188,7 +190,6 @@ int main()
 				break;
 			}
 			outputAux = decript(key, cript);
-
 			addSpecials(&outputAux, replacementList);
 			outputText(outputAux, "output");
 			std::cout << "\nDecripted output generated\n"
